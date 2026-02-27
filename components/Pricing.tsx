@@ -24,7 +24,7 @@ export default function Pricing() {
             <div className="price-feat"><span className="price-check">✓</span>3 automations</div>
             <div className="price-feat" style={{ opacity: 0.4 }}><span>—</span>&nbsp;Storefront</div>
             <div className="price-feat" style={{ opacity: 0.4 }}><span>—</span>&nbsp;Delivery integration</div>
-            <a href="#" className="btn btn-ghost btn-lg" style={{ width: '100%', marginTop: 24 }}>Get started</a>
+            <a href="/signup" className="btn btn-ghost btn-lg" style={{ width: '100%', marginTop: 24 }}>Get started</a>
           </div>
 
           {/* Growth */}
@@ -41,7 +41,7 @@ export default function Pricing() {
             <div className="price-feat"><span className="price-check">✓</span>Storefront & catalog</div>
             <div className="price-feat"><span className="price-check">✓</span>Payment integrations</div>
             <div className="price-feat"><span className="price-check">✓</span>Delivery dispatch</div>
-            <a href="#" className="btn btn-teal btn-lg" style={{ width: '100%', marginTop: 24 }}>Start Growth →</a>
+            <a href="/signup" className="btn btn-teal btn-lg" style={{ width: '100%', marginTop: 24 }}>Start Growth →</a>
           </div>
 
           {/* Enterprise */}
@@ -56,7 +56,7 @@ export default function Pricing() {
             <div className="price-feat"><span className="price-check">✓</span>Advanced IAM & teams</div>
             <div className="price-feat"><span className="price-check">✓</span>SLA & dedicated support</div>
             <div className="price-feat"><span className="price-check">✓</span>On-premise option</div>
-            <a href="#" className="btn btn-primary btn-lg" style={{ width: '100%', marginTop: 24 }}>Contact sales</a>
+            <a href="/signup" className="btn btn-primary btn-lg" style={{ width: '100%', marginTop: 24 }}>Contact sales</a>
           </div>
         </div>
       </div>
