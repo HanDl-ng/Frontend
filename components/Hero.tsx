@@ -17,6 +17,7 @@ export default function Hero() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  
   return (
     <section className="hero">
       <div className="mesh mesh-1" ref={(el) => { meshRefs.current[0] = el; }} />
