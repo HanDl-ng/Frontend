@@ -32,8 +32,8 @@ export default function Navbar() {
         <li><a href="#pricing">Pricing</a></li>
       </ul>
       <div className="nav-actions">
-        <a href="#" className="btn btn-ghost">Sign in</a>
-        <a href="#" className="btn btn-primary">Start free →</a>
+        <a href="/login" className="btn btn-ghost">Sign in</a>
+        <a href="/signup" className="btn btn-primary">Start free →</a>
       </div>
     </nav>
   );

@@ -26,7 +26,7 @@ export default function CTA() {
           Set up in under 10 minutes. Connect WhatsApp, build your first automation, and let HanDl handle the rest.
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="#" className="btn btn-primary btn-xl">Start for free →</a>
+          <a href="/signup" className="btn btn-primary btn-xl">Start for free →</a>
           <a href="#" className="btn btn-ghost btn-xl">Book a demo</a>
         </div>
         <div style={{ marginTop: 24, fontSize: 13, color: 'var(--ink-f)' }}>

@@ -29,7 +29,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="landing-page">
       <CustomCursor />
       <Particles />
       <TemplatesModal isOpen={templatesOpen} onClose={() => setTemplatesOpen(false)} />
@@ -46,6 +46,6 @@ export default function Home() {
       <CTA />
       <Footer onOpenTemplates={() => setTemplatesOpen(true)} />
       <ScrollReveal />
-    </>
+    </div>
   );
 }

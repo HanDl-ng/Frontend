@@ -17,11 +17,12 @@ export default function Hero() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  
   return (
     <section className="hero">
-      <div className="mesh mesh-1" ref={(el) => (meshRefs.current[0] = el)} />
-      <div className="mesh mesh-2" ref={(el) => (meshRefs.current[1] = el)} />
-      <div className="mesh mesh-3" ref={(el) => (meshRefs.current[2] = el)} />
+      <div className="mesh mesh-1" ref={(el) => { meshRefs.current[0] = el; }} />
+      <div className="mesh mesh-2" ref={(el) => { meshRefs.current[1] = el; }} />
+      <div className="mesh mesh-3" ref={(el) => { meshRefs.current[2] = el; }} />
       <div className="hero-grid" />
 
       <div className="hero-content">
@@ -41,7 +42,7 @@ export default function Hero() {
           and build automated workflows — all in one place.
         </p>
         <div className="hero-actions">
-          <a href="#" className="btn btn-primary btn-xl">Get started free</a>
+          <a href="/signup" className="btn btn-primary btn-xl">Get started free</a>
           <a href="#" className="btn btn-ghost btn-xl">▶&nbsp;&nbsp;Watch 3-min demo</a>
         </div>
         <div className="hero-social">
