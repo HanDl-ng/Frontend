@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import SpeedInsightsClient from "../components/SpeedInsightsClient";
 import { Analytics } from "@vercel/analytics/next";
+import { Suspense } from "react";
+import TopLoader from "@/components/TopLoader";
 
 const geistSans = Poppins({ 
   variable: "--font-geist-sans",
@@ -89,6 +91,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} antialiased`}>
+        <Suspense fallback={null}><TopLoader /></Suspense>
         {children}
         <SpeedInsightsClient />
         <Analytics />

@@ -12,6 +12,7 @@ export default function VerifyOtpPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get('email') || '';
+  const flow = searchParams.get('flow') || 'reset'; // 'login' | 'signup' | 'reset'
 
   const [otp, setOtp] = useState<string[]>(Array(OTP_LENGTH).fill(''));
   const [loading, setLoading] = useState(false);
@@ -111,7 +112,11 @@ export default function VerifyOtpPage() {
       setLoading(false);
       showToast('Code verified successfully!', 'success');
       setTimeout(() => {
-        router.push(`/reset-password?email=${encodeURIComponent(email)}&token=${code}`);
+        if (flow === 'login' || flow === 'signup') {
+          router.push('/dashboard');
+        } else {
+          router.push(`/reset-password?email=${encodeURIComponent(email)}&token=${code}`);
+        }
       }, 1200);
     }, 1500);
   };

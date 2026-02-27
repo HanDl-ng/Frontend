@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, FormEvent, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Toast, { ToastType } from '@/components/Toast';
 
 export default function SignupPage() {
+  const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,7 +47,10 @@ export default function SignupPage() {
 
     setTimeout(() => {
       setLoading(false);
-      showToast('Account created successfully! Check your email to verify.', 'success');
+      showToast('OTP sent to your email. Please verify to complete registration.', 'success');
+      setTimeout(() => {
+        router.push(`/verify-otp?email=${encodeURIComponent(email)}&flow=signup`);
+      }, 800);
     }, 1800);
   };
 

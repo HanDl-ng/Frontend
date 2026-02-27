@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, FormEvent, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Toast, { ToastType } from '@/components/Toast';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -28,10 +30,13 @@ export default function LoginPage() {
     }
     setLoading(true);
 
-    // Simulate API call
+    // Simulate API call — sends OTP to email
     setTimeout(() => {
       setLoading(false);
-      showToast('Welcome back! Redirecting to dashboard…', 'success');
+      showToast('OTP sent to your email. Please verify.', 'success');
+      setTimeout(() => {
+        router.push(`/verify-otp?email=${encodeURIComponent(email)}&flow=login`);
+      }, 800);
     }, 1500);
   };
 
