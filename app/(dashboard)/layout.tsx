@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import Sidebar from '@/components/dashboard/Sidebar';
 import Topbar from '@/components/dashboard/Topbar';
 import '@/app/dashboard.css';
+import './automations/automations.css';
 
 const pageTitles: Record<string, string> = {
   '/dashboard': 'Dashboard',
@@ -21,6 +22,7 @@ const pageTitles: Record<string, string> = {
   '/settings': 'Settings',
   '/settings/developer': 'Developer',
   '/settings/logs': 'Logs',
+  '/help': 'Help & Support',
 };
 
 export default function DashboardLayout({

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import SpeedInsightsClient from "../components/SpeedInsightsClient";
@@ -12,6 +12,12 @@ const geistSans = Poppins({
   weight: ['400', '500', '600', '700', '800', '900'],
 });
  
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata: Metadata = {
   title: 'HanDl — Business Automation for Conversations, Orders & Delivery',
   description: 'Connect messaging channels, let AI handle conversations, create orders, trigger delivery, and build automated workflows — all in one place.',

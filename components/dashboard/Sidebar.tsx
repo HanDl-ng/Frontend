@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, type ReactNode } from 'react';
+import { useState, useEffect, useRef, type ReactNode } from 'react';
 import {
   GridIcon, ChatIcon, BoltIcon, ShoppingBagIcon,
   LinkIcon, BarChartIcon, CreditCardIcon, GearIcon,
   ChevronDownIcon, ChevronRightIcon,
+  UserIcon, SparklesIcon, LogOutIcon, HelpCircleIcon,
 } from '@/components/icons';
 
 interface NavItem {
@@ -75,6 +76,18 @@ interface SidebarProps {
 export default function Sidebar({ open, onClose }: SidebarProps) {
   const pathname = usePathname();
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+    if (profileOpen) document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [profileOpen]);
 
   const isActive = (href: string) => {
     if (href === '/dashboard') return pathname === '/dashboard';
@@ -151,12 +164,41 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         </nav>
 
         <div className="sidebar-bottom">
-          <div className="sidebar-user">
-            <div className="sidebar-avatar">JD</div>
-            <div className="sidebar-user-info">
-              <div className="sidebar-user-name">John Doe</div>
-              <div className="sidebar-user-role">Admin</div>
+          <div className="profile-trigger" ref={profileRef}>
+            <div className="sidebar-user" onClick={() => setProfileOpen((v) => !v)}>
+              <div className="sidebar-avatar">JD</div>
+              <div className="sidebar-user-info">
+                <div className="sidebar-user-name">John Doe</div>
+                <div className="sidebar-user-role">Admin</div>
+              </div>
             </div>
+            {profileOpen && (
+              <div className="profile-dropdown profile-dropdown-bottom">
+                <div className="profile-dd-header">
+                  <div className="profile-dd-name">John Doe</div>
+                  <div className="profile-dd-email">john@handl.ai</div>
+                </div>
+                <div className="profile-dd-items">
+                  <Link href="/settings" className="profile-dd-item" onClick={() => { setProfileOpen(false); onClose(); }}>
+                    <UserIcon /> Account
+                  </Link>
+                  <Link href="/billing" className="profile-dd-item" onClick={() => { setProfileOpen(false); onClose(); }}>
+                    <CreditCardIcon /> Billing
+                  </Link>
+                  <Link href="/help" className="profile-dd-item" onClick={() => { setProfileOpen(false); onClose(); }}>
+                    <HelpCircleIcon /> Help & Support
+                  </Link>
+                  <div className="profile-dd-sep" />
+                  <Link href="/billing" className="profile-dd-item upgrade" onClick={() => { setProfileOpen(false); onClose(); }}>
+                    <SparklesIcon /> Upgrade Plan
+                  </Link>
+                  <div className="profile-dd-sep" />
+                  <button className="profile-dd-item danger" onClick={() => { setProfileOpen(false); }}>
+                    <LogOutIcon /> Log Out
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </aside>
