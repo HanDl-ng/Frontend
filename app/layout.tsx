@@ -5,6 +5,10 @@ import SpeedInsightsClient from "../components/SpeedInsightsClient";
 import { Analytics } from "@vercel/analytics/next";
 import { Suspense } from "react";
 import TopLoader from "@/components/TopLoader";
+import { ToastProvider } from "@/components/ToastProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import CookieConsent from "@/components/CookieConsent";
+import { OrganizationJsonLd, ProductJsonLd } from "@/components/JsonLd";
 
 const geistSans = Poppins({ 
   variable: "--font-geist-sans",
@@ -86,19 +90,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#6f1cd7" />
+        <meta name="theme-color" content="#2e8b6e" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
           rel="stylesheet"
         />
+        <OrganizationJsonLd />
+        <ProductJsonLd />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('handl_theme');if(t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark')}}catch(e){}})()`,
+          }}
+        />
       </head>
       <body className={`${geistSans.variable} antialiased`}>
-        <Suspense fallback={null}><TopLoader /></Suspense>
-        {children}
+        <ThemeProvider>
+          <ToastProvider>
+            <Suspense fallback={null}><TopLoader /></Suspense>
+            {children}
+            <CookieConsent />
+          </ToastProvider>
+        </ThemeProvider>
         <SpeedInsightsClient />
         <Analytics />
       </body>

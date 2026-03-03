@@ -1,7 +1,14 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'HanDl — Sign In',
+  title: 'Sign In — HanDl',
+  description: 'Sign in to your HanDl account to manage conversations, orders, and products.',
+  openGraph: {
+    title: 'Sign In — HanDl',
+    description: 'Sign in to your HanDl account.',
+    url: 'https://handl-ng.com/signin',
+    images: [{ url: '/og.png', width: 1200, height: 630 }],
+  },
 };
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {

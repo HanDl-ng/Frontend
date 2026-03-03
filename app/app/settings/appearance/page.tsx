@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import SettingsNavigation from '../_components/SettingsNavigation';
+import { useTheme } from '@/components/ThemeProvider';
 
 export default function AppearanceSettingsPage() {
-  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('light');
+  const { theme, setTheme } = useTheme();
   const [accentColor, setAccentColor] = useState('#2E8B6E');
   const [density, setDensity] = useState<'comfortable' | 'compact'>('comfortable');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);

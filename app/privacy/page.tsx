@@ -1,7 +1,16 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
-export const metadata = { title: 'Privacy Policy — HanDl' };
+export const metadata = {
+  title: 'Privacy Policy — HanDl',
+  description: 'How HanDl collects, uses, and protects your data.',
+  openGraph: {
+    title: 'Privacy Policy — HanDl',
+    description: 'How HanDl collects, uses, and protects your data.',
+    url: 'https://handl-ng.com/privacy',
+    images: [{ url: '/og.png', width: 1200, height: 630 }],
+  },
+};
 
 export default function PrivacyPage() {
   return (

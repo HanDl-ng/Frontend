@@ -9,6 +9,7 @@ import {
   BarChartIcon, GearIcon, PackageIcon, UserIcon, CartIcon, WarningIcon,
   SparklesIcon, LogOutIcon, RobotIcon,
 } from '@/components/icons';
+import ShortcutsModal from '@/components/ShortcutsModal';
 
 interface TopbarProps {
   title: string;
@@ -45,6 +46,8 @@ export default function Topbar({ title, onMenuClick }: TopbarProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [notifOpen, setNotifOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [shortcutsOpen, setShortcutsOpen] = useState(false);
+  const gPressedRef = useRef(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const notifRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
@@ -61,21 +64,70 @@ export default function Topbar({ title, onMenuClick }: TopbarProps) {
     return acc;
   }, {});
 
-  /* Keyboard shortcut: Cmd+K / Ctrl+K */
+  /* Keyboard shortcut: Cmd+K / Ctrl+K + G-key navigation + ? for shortcuts */
   useEffect(() => {
+    let gTimer: ReturnType<typeof setTimeout>;
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore when typing in inputs
+      const tag = (e.target as HTMLElement).tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target as HTMLElement).isContentEditable) return;
+
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         setSearchOpen(true);
+        return;
+      }
+      // Cmd+D / Ctrl+D to toggle dark mode
+      if ((e.metaKey || e.ctrlKey) && e.key === 'd') {
+        e.preventDefault();
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('handl_theme', next);
+        return;
+      }
+      if (e.key === '?') {
+        e.preventDefault();
+        setShortcutsOpen(true);
+        return;
       }
       if (e.key === 'Escape') {
         setSearchOpen(false);
         setNotifOpen(false);
+        setShortcutsOpen(false);
+        return;
+      }
+      // G-key + second key navigation
+      if (e.key === 'g' || e.key === 'G') {
+        if (!gPressedRef.current) {
+          gPressedRef.current = true;
+          gTimer = setTimeout(() => { gPressedRef.current = false; }, 800);
+          return;
+        }
+      }
+      if (gPressedRef.current) {
+        gPressedRef.current = false;
+        clearTimeout(gTimer);
+        const routes: Record<string, string> = {
+          d: '/app/dashboard',
+          c: '/app/conversations',
+          o: '/app/orders',
+          p: '/app/products',
+          s: '/app/settings',
+          r: '/app/reports',
+          i: '/app/integrations',
+        };
+        const route = routes[e.key.toLowerCase()];
+        if (route) {
+          e.preventDefault();
+          router.push(route);
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+    return () => { window.removeEventListener('keydown', handleKeyDown); clearTimeout(gTimer); };
+  }, [router]);
 
   /* Focus input when search opens */
   useEffect(() => {
@@ -255,6 +307,8 @@ export default function Topbar({ title, onMenuClick }: TopbarProps) {
           </div>
         </div>
       )}
+
+      <ShortcutsModal open={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
     </>
   );
 }

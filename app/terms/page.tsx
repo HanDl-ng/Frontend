@@ -1,7 +1,16 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
-export const metadata = { title: 'Terms of Service — HanDl' };
+export const metadata = {
+  title: 'Terms of Service — HanDl',
+  description: 'Terms and conditions for using HanDl.',
+  openGraph: {
+    title: 'Terms of Service — HanDl',
+    description: 'Terms and conditions for using HanDl.',
+    url: 'https://handl-ng.com/terms',
+    images: [{ url: '/og.png', width: 1200, height: 630 }],
+  },
+};
 
 export default function TermsPage() {
   return (
