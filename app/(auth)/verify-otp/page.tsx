@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, FormEvent, useCallback, KeyboardEvent, ClipboardEvent } from 'react';
+import { useState, useEffect, useRef, FormEvent, useCallback, KeyboardEvent, ClipboardEvent, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Toast, { ToastType } from '@/components/Toast';
@@ -8,7 +8,7 @@ import Toast, { ToastType } from '@/components/Toast';
 const OTP_LENGTH = 6;
 const OTP_EXPIRY_SECONDS = 10 * 60; // 10 minutes
 
-export default function VerifyOtpPage() {
+function VerifyOtpContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get('email') || '';
@@ -112,8 +112,10 @@ export default function VerifyOtpPage() {
       setLoading(false);
       showToast('Code verified successfully!', 'success');
       setTimeout(() => {
-        if (flow === 'login' || flow === 'signup') {
-          router.push('/dashboard');
+        if (flow === 'signup') {
+          router.push('/onboarding');
+        } else if (flow === 'login') {
+          router.push('/app/dashboard');
         } else {
           router.push(`/reset-password?email=${encodeURIComponent(email)}&token=${code}`);
         }
@@ -186,9 +188,17 @@ export default function VerifyOtpPage() {
         </p>
 
         <p className="auth-switch" style={{ marginTop: 8 }}>
-          <Link href="/login" className="auth-switch-link">← Back to login</Link>
+          <Link href="/signin" className="auth-switch-link">← Back to sign in</Link>
         </p>
       </div>
     </>
+  );
+}
+
+export default function VerifyOtpPage() {
+  return (
+    <Suspense fallback={null}>
+      <VerifyOtpContent />
+    </Suspense>
   );
 }

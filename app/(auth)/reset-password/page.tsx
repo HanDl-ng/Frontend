@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, FormEvent, useCallback } from 'react';
+import { useState, FormEvent, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Toast, { ToastType } from '@/components/Toast';
 
-export default function ResetPasswordPage() {
+function ResetPasswordContent() {
   const searchParams = useSearchParams();
   const email = searchParams.get('email') || '';
 
@@ -67,7 +67,7 @@ export default function ResetPasswordPage() {
               Your password has been reset successfully. You can now sign in with your new password.
             </p>
           </div>
-          <Link href="/login" className="btn btn-teal btn-lg auth-submit" style={{ textAlign: 'center', width: '100%' }}>
+          <Link href="/signin" className="btn btn-teal btn-lg auth-submit" style={{ textAlign: 'center', width: '100%' }}>
             Back to Sign In
           </Link>
         </div>
@@ -151,9 +151,17 @@ export default function ResetPasswordPage() {
         </form>
 
         <p className="auth-switch">
-          <Link href="/login" className="auth-switch-link">← Back to login</Link>
+          <Link href="/signin" className="auth-switch-link">← Back to sign in</Link>
         </p>
       </div>
     </>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={null}>
+      <ResetPasswordContent />
+    </Suspense>
   );
 }

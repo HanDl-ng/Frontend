@@ -84,7 +84,7 @@ export default function ForgotPasswordPage() {
 
         <p className="auth-switch">
           Remember your password?{' '}
-          <Link href="/login" className="auth-switch-link">Back to login</Link>
+          <Link href="/signin" className="auth-switch-link">Back to sign in</Link>
         </p>
       </div>
     </>

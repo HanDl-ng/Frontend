@@ -67,16 +67,15 @@ export default function DashboardPreview() {
                   <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.2" />
                   <path d="M4.5 7h5M7 4.5v5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                 </svg>
-                Automations
+                Products
               </div>
-              <div className="ps-sec">Commerce</div>
+              <div className="ps-sec">Connect</div>
               <div className="ps-item">
                 <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
-                  <path d="M3 3h8l-1 7H4L3 3z" stroke="currentColor" strokeWidth="1.2" />
-                  <circle cx="5.5" cy="12" r="1" fill="currentColor" opacity=".6" />
-                  <circle cx="9.5" cy="12" r="1" fill="currentColor" opacity=".6" />
+                  <path d="M2 3h10v7a2 2 0 01-2 2H4a2 2 0 01-2-2V3z" stroke="currentColor" strokeWidth="1.2" />
+                  <path d="M5 3V2h4v1" stroke="currentColor" strokeWidth="1.2" />
                 </svg>
-                Storefront
+                Integrations
               </div>
               <div className="ps-item">
                 <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
@@ -85,12 +84,12 @@ export default function DashboardPreview() {
                 </svg>
                 Orders
               </div>
-              <div className="ps-sec">System</div>
+              <div className="ps-sec">Insights</div>
               <div className="ps-item">
                 <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
                   <path d="M2 10l3-4 3 3 4-6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                 </svg>
-                Analytics
+                Reports
               </div>
               <div className="ps-item">
                 <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
@@ -181,26 +180,25 @@ export default function DashboardPreview() {
                   </div>
                 </div>
                 <div className="b-card">
-                  <div className="b-card-title">Automation Health</div>
+                  <div className="b-card-title">AI Agent Activity</div>
                   <div className="bar-row">
-                    <div className="bar-lbl">Sales Flow</div>
+                    <div className="bar-lbl">Orders</div>
                     <div className="bar-bg"><div className="bar-fill bar-teal" style={{ width: '85%' }} /></div>
-                    <div style={{ fontSize: 9, color: 'var(--ink-f)', width: 28, textAlign: 'right' }}>85%</div>
+                    <div style={{ fontSize: 9, color: 'var(--ink-f)', width: 28, textAlign: 'right' }}>37</div>
                   </div>
                   <div className="bar-row">
-                    <div className="bar-lbl">Support</div>
-                    <div className="bar-bg"><div className="bar-fill bar-blue" style={{ width: '72%' }} /></div>
-                    <div style={{ fontSize: 9, color: 'var(--ink-f)', width: 28, textAlign: 'right' }}>72%</div>
+                    <div className="bar-lbl">AI Resolved</div>
+                    <div className="bar-bg"><div className="bar-fill bar-blue" style={{ width: '84%' }} /></div>
+                    <div style={{ fontSize: 9, color: 'var(--ink-f)', width: 28, textAlign: 'right' }}>84%</div>
                   </div>
                   <div className="bar-row">
-                    <div className="bar-lbl">Delivery</div>
-                    <div className="bar-bg"><div className="bar-fill bar-orange" style={{ width: '60%' }} /></div>
-                    <div style={{ fontSize: 9, color: 'var(--ink-f)', width: 28, textAlign: 'right' }}>60%</div>
+                    <div className="bar-lbl">Escalated</div>
+                    <div className="bar-bg"><div className="bar-fill bar-orange" style={{ width: '16%' }} /></div>
+                    <div style={{ fontSize: 9, color: 'var(--ink-f)', width: 28, textAlign: 'right' }}>16%</div>
                   </div>
                   <div style={{ display: 'flex', gap: 4, marginTop: 10 }}>
-                    <span className="tag tag-live">● 4 Live</span>
-                    <span className="tag tag-draft">2 Draft</span>
-                    <span className="tag tag-error">1 Error</span>
+                    <span className="tag tag-live">● Agent Active</span>
+                    <span className="tag tag-ai">3 Channels</span>
                   </div>
                 </div>
               </div>

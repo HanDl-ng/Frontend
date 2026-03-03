@@ -1,11 +1,11 @@
 export default function Features() {
   const features = [
-    { icon: '💬', title: 'Omnichannel Inbox', desc: 'Handle conversations from WhatsApp, Instagram, SMS, and email in a single unified inbox with smart routing and AI handoff controls.', delay: 'd1' },
-    { icon: '⚡', title: 'Visual Flow Builder', desc: 'Drag-and-drop automation canvas. Connect triggers, AI steps, conditions, and actions like a pipeline diagram — no code needed.', delay: 'd2' },
-    { icon: '🧠', title: 'AI That Actually Works', desc: 'AI handles end-to-end customer conversations, qualifies leads, takes orders, and hands off to humans exactly when needed.', delay: 'd3' },
-    { icon: '💳', title: 'Payments Built In', desc: 'Send payment links, confirm transactions, and trigger the next step automatically. Native integrations with Paystack, Flutterwave, and more.', delay: 'd1' },
-    { icon: '🛵', title: 'Delivery Dispatch', desc: 'Call a rider, track deliveries, update customers in real time, and handle failed deliveries — all without leaving HanDl.', delay: 'd2' },
-    { icon: '📊', title: 'Analytics & Reports', desc: 'See messaging performance, conversion rates, automation success, and delivery metrics across all channels in one dashboard.', delay: 'd3' },
+    { icon: '🤖', title: 'AI Business Agent', desc: 'An always-on agent that handles customer conversations end-to-end — answers questions, takes orders, and escalates to humans when needed.', delay: 'd1' },
+    { icon: '💬', title: 'Omnichannel Inbox', desc: 'Handle conversations from WhatsApp, Instagram, SMS, and email in a single unified inbox with smart routing and AI handoff controls.', delay: 'd2' },
+    { icon: '📦', title: 'Orders & Products', desc: 'Manage your product catalog, track orders, and let your AI agent create orders directly from conversations — no manual data entry.', delay: 'd3' },
+    { icon: '💳', title: 'Payments Built In', desc: 'Send payment links, confirm transactions, and update order status automatically. Native integrations with Paystack, Flutterwave, and more.', delay: 'd1' },
+    { icon: '🏪', title: 'Storefront', desc: 'A simple, shareable online storefront for your products. Customers browse, order, and pay — with your AI agent assisting in real time.', delay: 'd2' },
+    { icon: '📊', title: 'Reports & Insights', desc: 'See messaging performance, AI resolution rates, order volumes, and revenue metrics across all channels in one dashboard.', delay: 'd3' },
   ];
 
   return (
@@ -14,10 +14,10 @@ export default function Features() {
         <div className="reveal">
           <div className="sec-label">● Features</div>
           <h2 className="sec-title">
-            Like CI/CD,<br />but for your ops.
+            Everything your<br />business needs.
           </h2>
           <p className="sec-sub">
-            Build automated workflows that connect messaging channels, AI, orders, payments, and delivery into one seamless pipeline.
+            An AI agent that connects your channels, handles conversations, and manages operations — all from one platform.
           </p>
         </div>
         <div className="features-grid">

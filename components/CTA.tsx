@@ -20,10 +20,10 @@ export default function CTA() {
       <div className="cta-inner reveal">
         <div className="sec-label" style={{ justifyContent: 'center' }}>● Get started today</div>
         <h2 className="sec-title" style={{ fontSize: 'clamp(40px,5vw,64px)' }}>
-          Your business<br />deserves a <span style={{ color: 'var(--teal)' }}>pipeline.</span>
+          Your business<br />deserves an <span style={{ color: 'var(--teal)' }}>AI agent.</span>
         </h2>
         <p className="sec-sub" style={{ margin: '0 auto 40px' }}>
-          Set up in under 10 minutes. Connect WhatsApp, build your first automation, and let HanDl handle the rest.
+          Set up in under 10 minutes. Connect WhatsApp, configure your AI agent, and let HanDl handle the rest.
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
           <a href="/signup" className="btn btn-primary btn-xl">Start for free →</a>

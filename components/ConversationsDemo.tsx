@@ -77,7 +77,7 @@ export default function ConversationsDemo() {
                 </div>
               </div>
               <div className="ai-banner">
-                <span>🤖 AI is handling this conversation (Sales Flow v3)</span>
+                <span>🤖 AI agent is handling this conversation</span>
                 <span className="ai-override">Take over</span>
               </div>
               <div className="chat-msgs">
@@ -98,7 +98,7 @@ export default function ConversationsDemo() {
                   <div className="msg-meta">10:24 AM · AI ✓✓</div>
                 </div>
                 <div className="msg msg-sys">
-                  {`Automation: "Sales Flow v3" triggered Create Order node`}
+                  {`AI agent created Order #1835 for Coke 500ml`}
                 </div>
               </div>
               <div className="chat-input">

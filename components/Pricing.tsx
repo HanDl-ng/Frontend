@@ -20,8 +20,8 @@ export default function Pricing() {
             <div className="price-div" />
             <div className="price-feat"><span className="price-check">✓</span>1 messaging channel</div>
             <div className="price-feat"><span className="price-check">✓</span>500 messages/month</div>
-            <div className="price-feat"><span className="price-check">✓</span>Basic AI responses</div>
-            <div className="price-feat"><span className="price-check">✓</span>3 automations</div>
+            <div className="price-feat"><span className="price-check">✓</span>Basic AI agent</div>
+            <div className="price-feat"><span className="price-check">✓</span>10 products</div>
             <div className="price-feat" style={{ opacity: 0.4 }}><span>—</span>&nbsp;Storefront</div>
             <div className="price-feat" style={{ opacity: 0.4 }}><span>—</span>&nbsp;Delivery integration</div>
             <a href="/signup" className="btn btn-ghost btn-lg" style={{ width: '100%', marginTop: 24 }}>Get started</a>
@@ -36,8 +36,8 @@ export default function Pricing() {
             <div className="price-div" />
             <div className="price-feat"><span className="price-check">✓</span>5 messaging channels</div>
             <div className="price-feat"><span className="price-check">✓</span>5,000 messages/month</div>
-            <div className="price-feat"><span className="price-check">✓</span>Advanced AI with custom prompts</div>
-            <div className="price-feat"><span className="price-check">✓</span>Unlimited automations</div>
+            <div className="price-feat"><span className="price-check">✓</span>Advanced AI with custom instructions</div>
+            <div className="price-feat"><span className="price-check">✓</span>Unlimited products</div>
             <div className="price-feat"><span className="price-check">✓</span>Storefront & catalog</div>
             <div className="price-feat"><span className="price-check">✓</span>Payment integrations</div>
             <div className="price-feat"><span className="price-check">✓</span>Delivery dispatch</div>
@@ -53,7 +53,7 @@ export default function Pricing() {
             <div className="price-feat"><span className="price-check">✓</span>Unlimited channels</div>
             <div className="price-feat"><span className="price-check">✓</span>Unlimited messages</div>
             <div className="price-feat"><span className="price-check">✓</span>Custom AI training</div>
-            <div className="price-feat"><span className="price-check">✓</span>Advanced IAM & teams</div>
+            <div className="price-feat"><span className="price-check">✓</span>Advanced IAM & roles</div>
             <div className="price-feat"><span className="price-check">✓</span>SLA & dedicated support</div>
             <div className="price-feat"><span className="price-check">✓</span>On-premise option</div>
             <a href="/signup" className="btn btn-primary btn-lg" style={{ width: '100%', marginTop: 24 }}>Contact sales</a>
