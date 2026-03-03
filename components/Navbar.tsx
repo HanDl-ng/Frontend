@@ -26,13 +26,12 @@ export default function Navbar() {
         HanDl
       </a>
       <ul className="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#automations">Automations</a></li>
-        <li><a href="#channels">Channels</a></li>
-        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="/how-it-works">How It Works</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/docs">Docs</a></li>
       </ul>
       <div className="nav-actions">
-        <a href="/login" className="btn btn-ghost">Sign in</a>
+        <a href="/signin" className="btn btn-ghost">Sign in</a>
         <a href="/signup" className="btn btn-primary">Start free →</a>
       </div>
     </nav>

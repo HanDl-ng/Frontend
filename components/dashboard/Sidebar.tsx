@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, useRef, type ReactNode } from 'react';
 import {
-  GridIcon, ChatIcon, BoltIcon, ShoppingBagIcon,
-  LinkIcon, BarChartIcon, CreditCardIcon, GearIcon,
+  GridIcon, ChatIcon, CartIcon, PackageIcon, ShoppingBagIcon,
+  LinkIcon, BarChartIcon, GearIcon,
   ChevronDownIcon, ChevronRightIcon,
-  UserIcon, SparklesIcon, LogOutIcon, HelpCircleIcon,
+  UserIcon, SparklesIcon, LogOutIcon,
 } from '@/components/icons';
 
 interface NavItem {
@@ -22,46 +22,44 @@ const navSections: { label: string; items: NavItem[] }[] = [
   {
     label: 'Main',
     items: [
-      { label: 'Dashboard', href: '/dashboard', icon: <GridIcon /> },
-      { label: 'Conversations', href: '/conversations', icon: <ChatIcon />, badge: 12 },
-      { label: 'Automations', href: '/automations', icon: <BoltIcon /> },
+      { label: 'Dashboard', href: '/app/dashboard', icon: <GridIcon /> },
+      { label: 'Conversations', href: '/app/conversations', icon: <ChatIcon />, badge: 5 },
     ],
   },
   {
-    label: 'Commerce',
+    label: 'Business',
     items: [
-      {
-        label: 'Storefront',
-        href: '/store/catalog',
-        icon: <ShoppingBagIcon />,
-        children: [
-          { label: 'Catalog', href: '/store/catalog' },
-          { label: 'Orders', href: '/store/orders' },
-          { label: 'Deliveries', href: '/store/deliveries' },
-          { label: 'Settings', href: '/store/settings' },
-        ],
-      },
+      { label: 'Orders', href: '/app/orders', icon: <CartIcon /> },
+      { label: 'Products', href: '/app/products', icon: <PackageIcon /> },
     ],
   },
   {
     label: 'Connect',
     items: [
-      { label: 'Channels', href: '/channels', icon: <LinkIcon /> },
-      { label: 'Analytics', href: '/analytics', icon: <BarChartIcon /> },
+      { label: 'Integrations', href: '/app/integrations', icon: <LinkIcon /> },
+      { label: 'Storefront', href: '/app/storefront', icon: <ShoppingBagIcon /> },
+    ],
+  },
+  {
+    label: 'Insights',
+    items: [
+      { label: 'Reports', href: '/app/reports', icon: <BarChartIcon /> },
     ],
   },
   {
     label: 'Workspace',
     items: [
-      { label: 'Billing', href: '/billing', icon: <CreditCardIcon /> },
       {
         label: 'Settings',
-        href: '/settings',
+        href: '/app/settings',
         icon: <GearIcon />,
         children: [
-          { label: 'General', href: '/settings' },
-          { label: 'Developer', href: '/settings/developer' },
-          { label: 'Logs', href: '/settings/logs' },
+          { label: 'Business', href: '/app/settings' },
+          { label: 'AI Agent', href: '/app/settings/agent' },
+          { label: 'Channels', href: '/app/settings/channels' },
+          { label: 'Billing', href: '/app/settings/billing' },
+          { label: 'API', href: '/app/settings/api' },
+          { label: 'Appearance', href: '/app/settings/appearance' },
         ],
       },
     ],
@@ -90,7 +88,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
   }, [profileOpen]);
 
   const isActive = (href: string) => {
-    if (href === '/dashboard') return pathname === '/dashboard';
+    if (href === '/app/dashboard') return pathname === '/app/dashboard';
     return pathname.startsWith(href);
   };
 
@@ -179,18 +177,11 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
                   <div className="profile-dd-email">john@handl.ai</div>
                 </div>
                 <div className="profile-dd-items">
-                  <Link href="/settings" className="profile-dd-item" onClick={() => { setProfileOpen(false); onClose(); }}>
+                  <Link href="/app/settings" className="profile-dd-item" onClick={() => { setProfileOpen(false); onClose(); }}>
                     <UserIcon /> Account
                   </Link>
-                  <Link href="/billing" className="profile-dd-item" onClick={() => { setProfileOpen(false); onClose(); }}>
-                    <CreditCardIcon /> Billing
-                  </Link>
-                  <Link href="/help" className="profile-dd-item" onClick={() => { setProfileOpen(false); onClose(); }}>
-                    <HelpCircleIcon /> Help & Support
-                  </Link>
-                  <div className="profile-dd-sep" />
-                  <Link href="/billing" className="profile-dd-item upgrade" onClick={() => { setProfileOpen(false); onClose(); }}>
-                    <SparklesIcon /> Upgrade Plan
+                  <Link href="/app/settings/agent" className="profile-dd-item" onClick={() => { setProfileOpen(false); onClose(); }}>
+                    <SparklesIcon /> AI Agent
                   </Link>
                   <div className="profile-dd-sep" />
                   <button className="profile-dd-item danger" onClick={() => { setProfileOpen(false); }}>

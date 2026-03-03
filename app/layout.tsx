@@ -19,9 +19,9 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'HanDl — Business Automation for Conversations, Orders & Delivery',
-  description: 'Connect messaging channels, let AI handle conversations, create orders, trigger delivery, and build automated workflows — all in one place.',
-  keywords: ['Business Automation', 'AI Conversations', 'Order Management', 'Delivery Automation', 'Workflow Builder', 'Messaging Channels', 'WhatsApp Business', 'Customer Support', 'HanDl'],
+  title: 'HanDl — AI-Powered Business Agent for Conversations, Orders & Commerce',
+  description: 'An AI agent that handles customer conversations, takes orders, manages products, and connects your channels — so you can focus on growing.',
+  keywords: ['AI Business Agent', 'AI Conversations', 'Order Management', 'WhatsApp Business', 'Customer Support', 'Omnichannel Inbox', 'Small Business', 'Commerce', 'HanDl'],
   authors: [{ name: 'HanDl' }],
   creator: 'HanDl',
   publisher: 'HanDl',
@@ -40,21 +40,21 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://handl-ng.com',
     siteName: 'HanDl',
-    title: 'HanDl — Business Automation for Conversations, Orders & Delivery',
-    description: 'Connect messaging channels, let AI handle conversations, create orders, trigger delivery, and build automated workflows — all in one place.',
+    title: 'HanDl — AI-Powered Business Agent for Conversations, Orders & Commerce',
+    description: 'An AI agent that handles customer conversations, takes orders, manages products, and connects your channels — so you can focus on growing.',
     images: [
       {
         url: '/og.png',
         width: 1200,
         height: 630,
-        alt: 'HanDl — Business Automation Platform',
+        alt: 'HanDl — AI-Powered Business Agent',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HanDl — Business Automation for Conversations, Orders & Delivery',
-    description: 'Connect messaging channels, let AI handle conversations, create orders, trigger delivery, and build automated workflows.',
+    title: 'HanDl — AI-Powered Business Agent for Conversations, Orders & Commerce',
+    description: 'An AI agent that handles customer conversations, takes orders, manages products, and connects your channels.',
     creator: '@handl',
     images: ['/og.png'],
   },

@@ -4,10 +4,10 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
-  SearchIcon, BellIcon, MenuIcon, HelpCircleIcon, XIcon,
-  GridIcon, ChatIcon, BoltIcon, ShoppingBagIcon, LinkIcon,
-  BarChartIcon, CreditCardIcon, GearIcon, PackageIcon, UserIcon, CartIcon, WarningIcon,
-  SparklesIcon, LogOutIcon,
+  SearchIcon, BellIcon, MenuIcon, XIcon,
+  GridIcon, ChatIcon, ShoppingBagIcon, LinkIcon,
+  BarChartIcon, GearIcon, PackageIcon, UserIcon, CartIcon, WarningIcon,
+  SparklesIcon, LogOutIcon, RobotIcon,
 } from '@/components/icons';
 
 interface TopbarProps {
@@ -17,29 +17,25 @@ interface TopbarProps {
 
 /* ── Search command palette data ────────────────── */
 const searchItems = [
-  { label: 'Dashboard', href: '/dashboard', icon: <GridIcon />, section: 'Pages' },
-  { label: 'Conversations', href: '/conversations', icon: <ChatIcon />, section: 'Pages' },
-  { label: 'Automations', href: '/automations', icon: <BoltIcon />, section: 'Pages' },
-  { label: 'Automation Builder', href: '/automations/builder', icon: <BoltIcon />, section: 'Pages' },
-  { label: 'Catalog', href: '/store/catalog', icon: <ShoppingBagIcon />, section: 'Pages' },
-  { label: 'Orders', href: '/store/orders', icon: <CartIcon />, section: 'Pages' },
-  { label: 'Deliveries', href: '/store/deliveries', icon: <PackageIcon />, section: 'Pages' },
-  { label: 'Channels', href: '/channels', icon: <LinkIcon />, section: 'Pages' },
-  { label: 'Analytics', href: '/analytics', icon: <BarChartIcon />, section: 'Pages' },
-  { label: 'Billing', href: '/billing', icon: <CreditCardIcon />, section: 'Pages' },
-  { label: 'Settings', href: '/settings', icon: <GearIcon />, section: 'Pages' },
-  { label: 'Developer', href: '/settings/developer', icon: <GearIcon />, section: 'Pages' },
-  { label: 'Logs', href: '/settings/logs', icon: <GearIcon />, section: 'Pages' },
-  { label: 'Help & Support', href: '/help', icon: <HelpCircleIcon />, section: 'Pages' },
+  { label: 'Dashboard', href: '/app/dashboard', icon: <GridIcon />, section: 'Pages' },
+  { label: 'Conversations', href: '/app/conversations', icon: <ChatIcon />, section: 'Pages' },
+  { label: 'Orders', href: '/app/orders', icon: <CartIcon />, section: 'Pages' },
+  { label: 'Products', href: '/app/products', icon: <PackageIcon />, section: 'Pages' },
+  { label: 'Integrations', href: '/app/integrations', icon: <LinkIcon />, section: 'Pages' },
+  { label: 'Storefront', href: '/app/storefront', icon: <ShoppingBagIcon />, section: 'Pages' },
+  { label: 'Reports', href: '/app/reports', icon: <BarChartIcon />, section: 'Pages' },
+  { label: 'Settings', href: '/app/settings', icon: <GearIcon />, section: 'Pages' },
+  { label: 'AI Agent', href: '/app/settings/agent', icon: <RobotIcon />, section: 'Pages' },
+  { label: 'Developer', href: '/app/settings/developer', icon: <GearIcon />, section: 'Pages' },
 ];
 
 /* ── Notification data ──────────────────────────── */
 const notifications = [
-  { id: 1, icon: <BoltIcon />, color: 'teal', title: 'Automation completed', desc: '"Order Confirmation" processed 45 messages successfully.', time: '5 min ago', unread: true },
+  { id: 1, icon: <RobotIcon />, color: 'teal', title: 'AI resolved conversation', desc: 'AI agent handled order inquiry from Adebayo O. automatically.', time: '5 min ago', unread: true },
   { id: 2, icon: <CartIcon />, color: 'blue', title: 'New order received', desc: 'Order #ORD-2847 from WhatsApp — ₦24,500.', time: '12 min ago', unread: true },
-  { id: 3, icon: <UserIcon />, color: 'orange', title: 'Escalation alert', desc: 'Adebayo O. has been escalated to a human agent.', time: '18 min ago', unread: true },
-  { id: 4, icon: <WarningIcon />, color: 'red', title: 'Automation error', desc: '"Lead Qualifier" hit error rate above 5%.', time: '32 min ago', unread: false },
-  { id: 5, icon: <PackageIcon />, color: 'teal', title: 'Delivery completed', desc: 'Delivery #DEL-1923 marked as completed.', time: '1 hr ago', unread: false },
+  { id: 3, icon: <UserIcon />, color: 'orange', title: 'Escalation alert', desc: 'Ngozi I. escalated to human — payment complaint.', time: '18 min ago', unread: true },
+  { id: 4, icon: <WarningIcon />, color: 'red', title: 'Payment failed', desc: 'Payment for order #ORD-2845 failed — retry needed.', time: '32 min ago', unread: false },
+  { id: 5, icon: <PackageIcon />, color: 'teal', title: 'Low stock alert', desc: '"Ankara Print Dress" is below 5 units in stock.', time: '1 hr ago', unread: false },
 ];
 
 export default function Topbar({ title, onMenuClick }: TopbarProps) {
@@ -172,7 +168,7 @@ export default function Topbar({ title, onMenuClick }: TopbarProps) {
                   ))}
                 </div>
                 <div className="notif-dropdown-footer">
-                  <Link href="/settings/logs" className="notif-view-all" onClick={() => setNotifOpen(false)}>
+                  <Link href="/app/reports" className="notif-view-all" onClick={() => setNotifOpen(false)}>
                     View all activity
                   </Link>
                 </div>
@@ -180,11 +176,7 @@ export default function Topbar({ title, onMenuClick }: TopbarProps) {
             )}
           </div>
 
-          {/* Help */}
-          <Link href="/help" className="topbar-btn" title="Help & Support">
-            <HelpCircleIcon />
-          </Link>
-
+          {/* Profile */}
           <div className="profile-trigger" ref={profileRef}>
             <div className="topbar-avatar" onClick={() => setProfileOpen((v) => !v)}>JD</div>
             {profileOpen && (
@@ -194,18 +186,11 @@ export default function Topbar({ title, onMenuClick }: TopbarProps) {
                   <div className="profile-dd-email">john@handl.ai</div>
                 </div>
                 <div className="profile-dd-items">
-                  <Link href="/settings" className="profile-dd-item" onClick={() => setProfileOpen(false)}>
+                  <Link href="/app/settings" className="profile-dd-item" onClick={() => setProfileOpen(false)}>
                     <UserIcon /> Account
                   </Link>
-                  <Link href="/billing" className="profile-dd-item" onClick={() => setProfileOpen(false)}>
-                    <CreditCardIcon /> Billing
-                  </Link>
-                  <Link href="/help" className="profile-dd-item" onClick={() => setProfileOpen(false)}>
-                    <HelpCircleIcon /> Help & Support
-                  </Link>
-                  <div className="profile-dd-sep" />
-                  <Link href="/billing" className="profile-dd-item upgrade" onClick={() => setProfileOpen(false)}>
-                    <SparklesIcon /> Upgrade Plan
+                  <Link href="/app/settings/agent" className="profile-dd-item" onClick={() => setProfileOpen(false)}>
+                    <SparklesIcon /> AI Agent
                   </Link>
                   <div className="profile-dd-sep" />
                   <button className="profile-dd-item danger" onClick={() => setProfileOpen(false)}>

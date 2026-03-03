@@ -66,7 +66,7 @@ export default function SignupPage() {
       <div className="auth-card reveal visible">
         <div className="auth-card-header">
           <h1 className="auth-title">Create your account</h1>
-          <p className="auth-subtitle">Start automating your business with HanDl</p>
+          <p className="auth-subtitle">Start running your business with HanDl’s AI agent</p>
         </div>
 
         <form className="auth-form" onSubmit={handleSubmit}>
@@ -153,8 +153,8 @@ export default function SignupPage() {
           <label className="auth-checkbox-row">
             <input type="checkbox" checked={agreed} onChange={e => setAgreed(e.target.checked)} />
             <span className="auth-checkbox-label">
-              I agree to the <a href="#" className="auth-link-sm">Terms of Service</a> and{' '}
-              <a href="#" className="auth-link-sm">Privacy Policy</a>
+              I agree to the <a href="/terms" className="auth-link-sm">Terms of Service</a> and{' '}
+              <a href="/privacy" className="auth-link-sm">Privacy Policy</a>
             </span>
           </label>
 
@@ -176,7 +176,7 @@ export default function SignupPage() {
 
         <p className="auth-switch">
           Already have an account?{' '}
-          <Link href="/login" className="auth-switch-link">Sign in</Link>
+          <Link href="/signin" className="auth-switch-link">Sign in</Link>
         </p>
       </div>
     </>

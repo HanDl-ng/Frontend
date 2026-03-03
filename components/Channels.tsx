@@ -14,7 +14,7 @@ export default function Channels() {
     <section id="channels" className="channels-bg">
       <div className="section">
         <div className="reveal" style={{ textAlign: 'center' }}>
-          <div className="sec-label" style={{ justifyContent: 'center' }}>● Channels</div>
+          <div className="sec-label" style={{ justifyContent: 'center' }}>● Integrations</div>
           <h2 className="sec-title">
             Meet your customers<br />where they are.
           </h2>

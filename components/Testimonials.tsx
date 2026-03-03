@@ -9,7 +9,7 @@ export default function Testimonials() {
       delay: '',
     },
     {
-      text: '"I built a full order-to-delivery flow in 20 minutes. My team used to spend 4 hours a day on WhatsApp — now it\'s 20 minutes."',
+      text: '"I set up the AI agent and connected WhatsApp in 20 minutes. My team used to spend 4 hours a day replying to messages — now it\'s 20 minutes."',
       name: 'Biodun Adeleke',
       role: 'Founder, QuickDrop · Abuja',
       avatarClass: 'ta2',
