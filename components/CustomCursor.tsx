@@ -1,68 +1,61 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 export default function CustomCursor() {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
-  const mouse = useRef({ x: 0, y: 0 });
-  const ring = useRef({ x: 0, y: 0 });
-
   useEffect(() => {
-    const cursor = cursorRef.current;
-    const ringEl = ringRef.current;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    const root = document.documentElement;
+    const body = document.body;
+    let activeTarget: HTMLElement | null = null;
+
+    body.classList.add('landing-torch');
 
     const onMouseMove = (e: MouseEvent) => {
-      mouse.current.x = e.clientX;
-      mouse.current.y = e.clientY;
-      if (cursor) {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-      }
-    };
+      root.style.setProperty('--cursor-x', `${e.clientX}px`);
+      root.style.setProperty('--cursor-y', `${e.clientY}px`);
 
-    const animRing = () => {
-      ring.current.x += (mouse.current.x - ring.current.x) * 0.12;
-      ring.current.y += (mouse.current.y - ring.current.y) * 0.12;
-      if (ringEl) {
-        ringEl.style.left = ring.current.x + 'px';
-        ringEl.style.top = ring.current.y + 'px';
+      const target = (e.target as HTMLElement | null)?.closest(
+        'a,button,.btn,.feat-card,.integration-card,.price-card,.testi-comment,.journal-card,.faq-question,.footer-social,.footer-link'
+      ) as HTMLElement | null;
+
+      if (activeTarget && activeTarget !== target) {
+        activeTarget.classList.remove('torch-lit');
       }
-      requestAnimationFrame(animRing);
+
+      if (target) {
+        const rect = target.getBoundingClientRect();
+        target.style.setProperty('--torch-x', `${e.clientX - rect.left}px`);
+        target.style.setProperty('--torch-y', `${e.clientY - rect.top}px`);
+        target.classList.add('torch-lit');
+      }
+
+      activeTarget = target;
     };
 
     document.addEventListener('mousemove', onMouseMove);
-    const rafId = requestAnimationFrame(animRing);
 
-    // Add hover effects
-    const addHover = (sel: string) => {
-      document.querySelectorAll(sel).forEach((el) => {
-        el.addEventListener('mouseenter', () => {
-          cursor?.classList.add('hovered');
-          ringEl?.classList.add('hovered');
-        });
-        el.addEventListener('mouseleave', () => {
-          cursor?.classList.remove('hovered');
-          ringEl?.classList.remove('hovered');
-        });
-      });
+    const onMouseLeaveWindow = () => {
+      if (activeTarget) {
+        activeTarget.classList.remove('torch-lit');
+      }
+      activeTarget = null;
     };
 
-    // Delay to ensure DOM is ready
-    const timer = setTimeout(() => {
-      addHover('a,.btn,.feat-card,.ch-card,.price-card,.testi-card,.wf-node,.ctx-act,.chat-send,.ps-item,.cli,.tpl-card,.mf-tab,.wf-btn,.modal-close,.ndo-var');
-    }, 500);
+    document.addEventListener('mouseleave', onMouseLeaveWindow);
 
     return () => {
       document.removeEventListener('mousemove', onMouseMove);
-      clearTimeout(timer);
+      document.removeEventListener('mouseleave', onMouseLeaveWindow);
+
+      if (activeTarget) {
+        activeTarget.classList.remove('torch-lit');
+      }
+
+      body.classList.remove('landing-torch');
     };
   }, []);
 
-  return (
-    <>
-      <div className="cursor" ref={cursorRef} />
-      <div className="cursor-ring" ref={ringRef} />
-    </>
-  );
+  return null;
 }

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3F1EB"/>
+      <stop offset="1" stop-color="#E8E4D9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <rect x="100" y="90" width="310" height="180" rx="14" stroke="#2E8B6E" stroke-width="4"/>
+  <rect x="450" y="260" width="300" height="180" rx="14" stroke="#1A1916" stroke-opacity="0.5" stroke-width="4"/>
+  <rect x="800" y="120" width="300" height="180" rx="14" stroke="#1A1916" stroke-opacity="0.5" stroke-width="4"/>
+  <path d="M410 180H450" stroke="#2E8B6E" stroke-width="5"/>
+  <path d="M750 350H800" stroke="#2E8B6E" stroke-width="5"/>
+  <circle cx="430" cy="180" r="8" fill="#2E8B6E"/>
+  <circle cx="770" cy="350" r="8" fill="#2E8B6E"/>
+  <text x="120" y="145" fill="#1A1916" font-family="DM Sans, Arial" font-size="28" font-weight="700">Incoming Conversations</text>
+  <text x="470" y="315" fill="#1A1916" font-family="DM Sans, Arial" font-size="28" font-weight="700">AI Assignment Layer</text>
+  <text x="820" y="175" fill="#1A1916" font-family="DM Sans, Arial" font-size="28" font-weight="700">Sales Team Queue</text>
+</svg>

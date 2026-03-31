@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" fill="none">
+  <rect width="1200" height="700" fill="#F1EEE6"/>
+  <rect x="150" y="120" width="270" height="180" stroke="#1A1916" stroke-opacity="0.18" stroke-width="4"/>
+  <rect x="465" y="120" width="270" height="180" stroke="#1A1916" stroke-opacity="0.18" stroke-width="4"/>
+  <rect x="780" y="120" width="270" height="180" stroke="#1A1916" stroke-opacity="0.18" stroke-width="4"/>
+  <rect x="150" y="350" width="270" height="180" stroke="#1A1916" stroke-opacity="0.18" stroke-width="4"/>
+  <rect x="465" y="350" width="270" height="180" stroke="#1A1916" stroke-opacity="0.18" stroke-width="4"/>
+  <rect x="780" y="350" width="270" height="180" fill="#2E8B6E" fill-opacity="0.13" stroke="#2E8B6E" stroke-width="4"/>
+  <text x="805" y="445" fill="#1A1916" font-family="DM Sans, Arial" font-size="34" font-weight="700">All Posts</text>
+</svg>

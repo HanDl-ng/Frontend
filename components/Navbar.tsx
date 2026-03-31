@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 export default function Navbar() {
   const navRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,8 +35,51 @@ export default function Navbar() {
           HanDl
         </a>
         <ul className="nav-links">
-          <li><a href="/how-it-works">How It Works</a></li>
+          <li 
+            className="nav-dropdown"
+            onMouseEnter={() => setProductsOpen(true)}
+            onMouseLeave={() => setProductsOpen(false)}
+          >
+            <span className="nav-dropdown-trigger">
+              Products
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </span>
+            <div className={`nav-dropdown-menu${productsOpen ? ' open' : ''}`}>
+              <a href="/products/sales-agent" className="nav-dropdown-item">
+                <div className="nav-dropdown-icon" style={{ background: 'linear-gradient(135deg, #2e8b6e 0%, #3da882 100%)' }}>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="8.5" cy="7" r="4" />
+                    <polyline points="17 11 19 13 23 9" />
+                  </svg>
+                </div>
+                <div className="nav-dropdown-content">
+                  <div className="nav-dropdown-title">Sales Agent</div>
+                  <div className="nav-dropdown-desc">Sells products and provides customer support</div>
+                </div>
+              </a>
+              <a href="/products/support-agent" className="nav-dropdown-item">
+                <div className="nav-dropdown-icon" style={{ background: 'linear-gradient(135deg, #5a7fd4 0%, #7094e8 100%)' }}>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                </div>
+                <div className="nav-dropdown-content">
+                  <div className="nav-dropdown-title">Support Agent</div>
+                  <div className="nav-dropdown-desc">Customer support without sales features</div>
+                </div>
+              </a>
+            </div>
+          </li>
+
+          <li><a href="#features">Features</a></li>
           <li><a href="/pricing">Pricing</a></li>
+          
+          <li><a href="#integrations">Integrations</a></li>
+          
+          <li><a href="/blog">Blog</a></li>
           <li><a href="/docs">Docs</a></li>
         </ul>
         <div className="nav-actions">
@@ -72,11 +116,17 @@ export default function Navbar() {
           </button>
         </div>
         <div className="mobile-menu-nav">
-          <a href="/how-it-works" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>How It Works</a>
+          <div className="mobile-menu-section">Products</div>
+          <a href="/products/sales-agent" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>Sales Agent</a>
+          <a href="/products/support-agent" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>Support Agent</a>
+          <div className="mobile-menu-section">Solutions</div>
+          <a href="/solutions/ecommerce" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>E-commerce</a>
+          <a href="/solutions/small-business" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>Small Business</a>
+          <div className="mobile-menu-section">Resources</div>
           <a href="/pricing" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>Pricing</a>
+          <a href="#integrations" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>Integrations</a>
+          <a href="/blog" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>Blog</a>
           <a href="/docs" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>Docs</a>
-          <a href="/changelog" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>Changelog</a>
-          <a href="/contact" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>Contact</a>
         </div>
         <div className="mobile-menu-actions">
           <a href="/signin" className="btn btn-ghost" onClick={() => setMenuOpen(false)}>Sign in</a>

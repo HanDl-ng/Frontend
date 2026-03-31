@@ -21,6 +21,9 @@ export default function StorefrontPage() {
             <a href={storeUrl} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
               <GlobeIcon /> Visit Store
             </a>
+            <a href="/app/settings/storefront" className="btn btn-teal">
+              Storefront Settings
+            </a>
           </div>
         </div>
       </div>
@@ -115,6 +118,11 @@ export default function StorefrontPage() {
           </div>
           <div className="d-form-hint" style={{ marginTop: 4 }}>
             Displays your products from the Products page with checkout functionality.
+          </div>
+          <div style={{ marginTop: 14 }}>
+            <a href="/app/settings/storefront" className="btn btn-ghost" style={{ height: 34, fontSize: 12 }}>
+              Open advanced storefront settings
+            </a>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ const settingsNav = [
   { label: 'Business', href: '/app/settings' },
   { label: 'AI Agent', href: '/app/settings/agent' },
   { label: 'Channels', href: '/app/settings/channels' },
+  { label: 'Storefront', href: '/app/settings/storefront' },
   { label: 'Billing', href: '/app/settings/billing' },
   { label: 'API', href: '/app/settings/api' },
   { label: 'Appearance', href: '/app/settings/appearance' },

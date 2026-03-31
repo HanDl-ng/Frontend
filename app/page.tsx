@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import CustomCursor from '@/components/CustomCursor';
 import Particles from '@/components/Particles';
+import UpdatesBanner from '@/components/UpdatesBanner';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Marquee from '@/components/Marquee';
@@ -12,7 +12,9 @@ import Channels from '@/components/Channels';
 import Stats from '@/components/Stats';
 import Pricing from '@/components/Pricing';
 import Testimonials from '@/components/Testimonials';
+import FAQ from '@/components/FAQ';
 import CTA from '@/components/CTA';
+import JournalShowcase from '@/components/JournalShowcase';
 import Footer from '@/components/Footer';
 import ScrollReveal from '@/components/ScrollReveal';
 
@@ -26,8 +28,8 @@ export default function Home() {
 
   return (
     <div className="landing-page">
-      <CustomCursor />
       <Particles />
+      <UpdatesBanner />
       <Navbar />
       <Hero />
       <Marquee />
@@ -37,7 +39,9 @@ export default function Home() {
       <Stats />
       <Pricing />
       <Testimonials />
+      <FAQ />
       <CTA />
+      <JournalShowcase />
       <Footer />
       <ScrollReveal />
     </div>

@@ -19,6 +19,7 @@ const pageTitles: Record<string, string> = {
   '/app/settings/developer': 'Developer',
   '/app/settings/business': 'Business Profile',
   '/app/settings/channels': 'Channel Config',
+  '/app/settings/storefront': 'Storefront Settings',
   '/app/settings/billing': 'Billing & Usage',
   '/app/settings/api': 'API & Webhooks',
   '/app/settings/appearance': 'Appearance',

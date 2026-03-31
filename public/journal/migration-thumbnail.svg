@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" fill="none">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1200" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6F4EE"/>
+      <stop offset="1" stop-color="#EDE8DD"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg3)"/>
+  <path d="M220 520C330 350 520 230 700 210C820 197 920 210 1030 260" stroke="#2E8B6E" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="260" cy="470" r="58" fill="#fff" stroke="#1A1916" stroke-opacity="0.2" stroke-width="4"/>
+  <circle cx="520" cy="330" r="58" fill="#fff" stroke="#1A1916" stroke-opacity="0.2" stroke-width="4"/>
+  <circle cx="780" cy="250" r="58" fill="#fff" stroke="#1A1916" stroke-opacity="0.2" stroke-width="4"/>
+  <circle cx="980" cy="260" r="58" fill="#2E8B6E" fill-opacity="0.16" stroke="#2E8B6E" stroke-width="4"/>
+  <text x="235" y="479" fill="#1A1916" font-family="Syne, Arial" font-size="28" font-weight="700">1</text>
+  <text x="496" y="339" fill="#1A1916" font-family="Syne, Arial" font-size="28" font-weight="700">2</text>
+  <text x="756" y="259" fill="#1A1916" font-family="Syne, Arial" font-size="28" font-weight="700">3</text>
+  <text x="957" y="269" fill="#1A1916" font-family="Syne, Arial" font-size="28" font-weight="700">4</text>
+  <text x="170" y="610" fill="#1A1916" font-family="DM Sans, Arial" font-size="28" font-weight="700">30-Day Migration Roadmap</text>
+</svg>

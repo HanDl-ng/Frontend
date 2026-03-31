@@ -26,29 +26,33 @@ export default function Testimonials() {
     },
   ];
 
+  const loopTestimonials = [...testimonials, ...testimonials];
+
   return (
     <section className="testi-bg">
       <div className="section">
-        <div className="reveal" style={{ textAlign: 'center' }}>
-          <div className="sec-label" style={{ justifyContent: 'center' }}>● Testimonials</div>
+        <div className="reveal">
+          <div className="sec-label">● Testimonials</div>
           <h2 className="sec-title">
             Loved by small businesses<br />doing big things.
           </h2>
         </div>
-        <div className="testi-grid">
-          {testimonials.map((t, i) => (
-            <div className={`testi-card reveal ${t.delay}`} key={i}>
-              <div className="testi-stars">★★★★★</div>
-              <p className="testi-text">{t.text}</p>
-              <div className="testi-author">
-                <div className={`ta ${t.avatarClass}`}>{t.letter}</div>
-                <div>
-                  <div className="ta-name">{t.name}</div>
-                  <div className="ta-role">{t.role}</div>
+        <div className="testi-marquee-wrap reveal d1">
+          <div className="testi-marquee-track">
+            {loopTestimonials.map((t, i) => (
+              <div className="testi-comment" key={`${t.name}-${i}`}>
+                <div className="testi-comment-head">
+                  <div className={`ta ${t.avatarClass}`}>{t.letter}</div>
+                  <div>
+                    <div className="ta-name">{t.name}</div>
+                    <div className="ta-role">{t.role}</div>
+                  </div>
                 </div>
+                <p className="testi-text">{t.text}</p>
+                <div className="testi-stars">★★★★★</div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

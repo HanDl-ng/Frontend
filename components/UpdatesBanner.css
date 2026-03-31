@@ -1,0 +1,147 @@
+/* ─── UPDATES BANNER ─────────────────────────────── */
+.updates-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 600;
+  background: var(--ink);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.updates-banner-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+}
+
+.updates-banner-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.updates-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--teal);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+.updates-message {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.updates-link {
+  color: var(--teal);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.updates-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--teal);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.updates-link:hover {
+  color: var(--teal-l);
+}
+
+.updates-link:hover::after {
+  transform: scaleX(1);
+}
+
+
+
+/* Adjust nav position when banner is visible */
+.landing-page nav {
+  top: 44px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .updates-banner-content {
+    padding: 10px 20px;
+  }
+
+  .updates-banner-text {
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .updates-message {
+    font-size: 12px;
+  }
+
+  .updates-link {
+    font-size: 12px;
+  }
+
+
+}
+
+@media (max-width: 480px) {
+  .updates-banner-text {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .updates-banner-content {
+    justify-content: flex-start;
+  }
+}

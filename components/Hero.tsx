@@ -26,14 +26,14 @@ export default function Hero() {
       <div className="hero-grid" />
 
       <div className="hero-content">
-        <div className="hero-badge">
+        <div className="hero-badge" style={{ visibility: 'hidden' }}>
           <span className="badge-dot" />
-          Your AI-powered business agent
+          &nbsp;
         </div>
         <h1 className="hero-headline">
           An <span className="uw">AI agent</span>
           <br />
-          that runs your
+          for your
           <br />
           <span className="accent">business ops.</span>
         </h1>
@@ -44,15 +44,6 @@ export default function Hero() {
         <div className="hero-actions">
           <a href="/signup" className="btn btn-primary btn-xl">Get started free</a>
           <a href="#" className="btn btn-ghost btn-xl">▶&nbsp;&nbsp;Watch 3-min demo</a>
-        </div>
-        <div className="hero-social">
-          <div className="avatars">
-            <div className="avatar av1">A</div>
-            <div className="avatar av2">B</div>
-            <div className="avatar av3">C</div>
-            <div className="avatar av4">D</div>
-          </div>
-          <span className="hero-social-text">Trusted by 2,400+ small businesses</span>
         </div>
       </div>
 
