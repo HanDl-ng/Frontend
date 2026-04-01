@@ -1,3 +1,5 @@
+@import './app/conversations/styles.css';
+
 /* ─── RESET ─────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -21,7 +23,7 @@ body{font-family:'DM Sans',sans-serif;background:#f8f7f4;color:#1a1916;overflow-
 }
 
 /* ─── NAV ─────────────────────────────────────────── */
-.landing-page nav{position:fixed;top:44px;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;background:rgba(248,247,244,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:box-shadow .4s}
+.landing-page nav{position:fixed;top:44px;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;background:rgba(248,247,244,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:box-shadow .4s,top .35s cubic-bezier(.4,0,.2,1)}
 .landing-page nav.scrolled{box-shadow:var(--sh-sm)}
 .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-.5px;color:var(--ink);display:flex;align-items:center;gap:8px;text-decoration:none}
 .logo-mark{width:32px;height:32px;background:var(--ink);border-radius:8px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
@@ -73,13 +75,18 @@ body{font-family:'DM Sans',sans-serif;background:#f8f7f4;color:#1a1916;overflow-
 .btn-xl{height:60px;padding:0 36px;font-size:16px;border-radius:14px}
 
 /* ─── HERO ─────────────────────────────────────────── */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden}
+.hero{min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:104px 40px 48px;position:relative;overflow:hidden}
 .mesh{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;animation:floatMesh 8s ease-in-out infinite;pointer-events:none}
 .mesh-1{width:600px;height:600px;background:radial-gradient(circle,rgba(46,139,110,.22) 0%,transparent 70%);top:-100px;right:-100px;animation-delay:0s}
 .mesh-2{width:400px;height:400px;background:radial-gradient(circle,rgba(255,200,100,.15) 0%,transparent 70%);bottom:0;left:100px;animation-delay:-3s}
 .mesh-3{width:300px;height:300px;background:radial-gradient(circle,rgba(100,150,255,.1) 0%,transparent 70%);top:35%;left:48%;animation-delay:-5s}
 @keyframes floatMesh{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(20px,-25px) scale(1.05)}66%{transform:translate(-15px,15px) scale(.95)}}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(26,25,22,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(26,25,22,.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center,black 0%,transparent 70%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;pointer-events:none;overflow:hidden;mask-image:radial-gradient(ellipse at center,black 0%,transparent 82%)}
+.hero-grid::before,.hero-grid::after{content:'';position:absolute;left:-20%;width:140%;background-image:linear-gradient(rgba(46,139,110,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(46,139,110,.11) 1px,transparent 1px);will-change:background-position,transform}
+.hero-grid::before{top:-10%;height:78%;background-size:58px 58px;opacity:.52;transform:perspective(1000px) rotateX(8deg) scale(1.05);animation:gridWallDrift 18s linear infinite}
+.hero-grid::after{bottom:-44%;height:84%;background-size:46px 46px;opacity:.45;transform:perspective(1000px) rotateX(74deg) scale(1.2);animation:gridFloorDrift 10s linear infinite}
+@keyframes gridWallDrift{from{background-position:0 0}to{background-position:0 58px}}
+@keyframes gridFloorDrift{from{background-position:0 0}to{background-position:90px 64px}}
 .hero-content{position:relative;z-index:1;max-width:900px;text-align:center}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:500;color:var(--ink-m);margin-bottom:32px;box-shadow:var(--sh-sm);animation:fadeInDown .8s cubic-bezier(.4,0,.2,1) both}
 .badge-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulseDot 2s ease-in-out infinite}
@@ -88,7 +95,7 @@ body{font-family:'DM Sans',sans-serif;background:#f8f7f4;color:#1a1916;overflow-
 .hero-headline .uw{position:relative;display:inline-block}
 .hero-headline .uw::after{content:'';position:absolute;bottom:6px;left:0;right:0;height:4px;background:var(--teal);border-radius:2px;transform:scaleX(0);transform-origin:left;animation:drawLine .8s .8s cubic-bezier(.4,0,.2,1) forwards}
 @keyframes drawLine{to{transform:scaleX(1)}}
-.hero-sub{font-size:18px;color:var(--ink-m);max-width:580px;margin:0 auto 40px;line-height:1.7;font-weight:300;animation:fadeInUp 1s .25s cubic-bezier(.4,0,.2,1) both}
+.hero-sub{font-size:18px;color:var(--ink-m);max-width:580px;margin:0 auto 30px;line-height:1.7;font-weight:300;animation:fadeInUp 1s .25s cubic-bezier(.4,0,.2,1) both}
 .hero-actions{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;animation:fadeInUp 1s .35s cubic-bezier(.4,0,.2,1) both}
 .hero-social{margin-top:48px;display:flex;align-items:center;gap:20px;animation:fadeInUp 1s .45s cubic-bezier(.4,0,.2,1) both}
 .hero-social-text{font-size:12px;color:var(--ink-f);font-weight:500;text-transform:uppercase;letter-spacing:.1em}
@@ -98,7 +105,7 @@ body{font-family:'DM Sans',sans-serif;background:#f8f7f4;color:#1a1916;overflow-
 .av1{background:#2e8b6e}.av2{background:#d4845a}.av3{background:#5a7fd4}.av4{background:#a25ad4}
 
 /* ─── DASHBOARD PREVIEW ───────────────────────────── */
-.hero-preview{position:relative;z-index:1;margin-top:72px;width:100%;max-width:1100px;display:flex;justify-content:center;animation:fadeInUp 1.2s .55s cubic-bezier(.4,0,.2,1) both}
+.hero-preview{position:relative;z-index:1;margin-top:44px;width:100%;max-width:1100px;display:flex;justify-content:center;animation:fadeInUp 1.2s .55s cubic-bezier(.4,0,.2,1) both}
 .preview-wrap{width:100%;perspective:1200px}
 .preview-card{background:#fff;border-radius:20px;border:1px solid var(--border);box-shadow:var(--sh-lg);overflow:hidden;transform:rotateX(5deg);transform-origin:top center;transition:transform .6s cubic-bezier(.4,0,.2,1);will-change:transform}
 .preview-card:hover{transform:rotateX(0deg)}
@@ -386,6 +393,27 @@ body{font-family:'DM Sans',sans-serif;background:#f8f7f4;color:#1a1916;overflow-
 .chat-send{background:var(--teal);color:#fff;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:inherit;transition:all .2s}
 .chat-send:hover{background:#1a6d56}
 .chat-send svg{width:16px;height:16px}
+
+/* Hero conversation simulation */
+.preview-inbox-sim{height:480px;background:#fff}
+.preview-inbox-sim .inbox-layout{height:calc(100% / .9);grid-template-columns:320px 1fr 240px;overflow:hidden;transform:scale(.9);transform-origin:top center;width:calc(100% / .9);margin-left:calc((100% - (100% / .9)) / 2)}
+.preview-inbox-sim .inbox-list,
+.preview-inbox-sim .inbox-chat,
+.preview-inbox-sim .inbox-context{min-height:0}
+.preview-inbox-sim .inbox-items,
+.preview-inbox-sim .inbox-context{overflow:hidden}
+.preview-inbox-sim .inbox-context{padding:20px 16px}
+.preview-inbox-sim .inbox-context{display:flex;flex-direction:column}
+.preview-inbox-sim .inbox-ctx-section,
+.preview-inbox-sim .inbox-ctx-customer,
+.preview-inbox-sim .inbox-ctx-order,
+.preview-inbox-sim .inbox-ctx-actions,
+.preview-inbox-sim .inbox-ctx-btn{width:100%}
+.preview-inbox-sim .inbox-messages{overflow:hidden;justify-content:flex-end}
+.preview-inbox-sim .inbox-msg{animation:previewMsgFade .32s cubic-bezier(.4,0,.2,1) both}
+@keyframes previewMsgFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.preview-inbox-sim .topbar-btn{width:36px;height:36px;border-radius:8px;background:none;border:1px solid var(--border);color:var(--ink-m);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;transition:all .2s}
+.preview-inbox-sim .topbar-btn:hover{background:var(--paper);color:var(--ink)}
 
 .showcase-frame.is-locked :is(a,button,input,select,textarea){pointer-events:none!important;cursor:not-allowed!important}
 .showcase-frame.is-locked .btn{opacity:.72}
@@ -772,6 +800,8 @@ body{font-family:'DM Sans',sans-serif;background:#f8f7f4;color:#1a1916;overflow-
   .faq-question{font-size:20px}
   .cta-shell{grid-template-columns:1fr}
   .cta-copy,.cta-panel{min-height:0}
+  .preview-inbox-sim .inbox-layout{grid-template-columns:220px 1fr;transform:none;width:100%;margin-left:0}
+  .preview-inbox-sim .inbox-context{display:none}
 
   /* Auth tablet */
   .auth-card{padding:32px}
@@ -790,8 +820,14 @@ body{font-family:'DM Sans',sans-serif;background:#f8f7f4;color:#1a1916;overflow-
   .hero-actions{flex-direction:column;align-items:stretch}
   .hero-actions .btn{width:100%;justify-content:center}
   .hero-social{flex-direction:column;gap:10px;align-items:center}
-  .hero-preview{margin-top:40px}
+  .hero-preview{margin-top:24px}
   .preview-body{height:280px;flex-direction:column}
+  .preview-inbox-sim{height:280px}
+  .preview-inbox-sim .inbox-layout{grid-template-columns:1fr;height:280px;transform:none;width:100%;margin-left:0}
+  .preview-inbox-sim .inbox-list{display:none}
+  .preview-inbox-sim .inbox-chat{border-right:none}
+  .preview-inbox-sim .inbox-messages{padding:10px 12px;min-height:0}
+  .preview-inbox-sim .inbox-input-area{padding:8px 12px}
   .ps{width:100%;height:auto;padding:10px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
   .ps-sec{display:none}
   .ps-item{padding:5px 8px;font-size:10px;margin-bottom:0}
@@ -819,7 +855,7 @@ body{font-family:'DM Sans',sans-serif;background:#f8f7f4;color:#1a1916;overflow-
   .landing-page nav{padding:0 16px;height:58px}
   .nav-logo{font-size:18px}
   .nav-actions .btn{padding:0 14px;height:36px;font-size:12px}
-  .hero{padding:90px 16px 48px}
+  .hero{padding:82px 16px 34px}
   .marquee-item{font-size:11px;gap:6px}
   .feat-card{padding:24px}
   .feat-icon{width:40px;height:40px;font-size:17px;margin-bottom:18px}

@@ -1,9 +1,239 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import ConversationList from '@/app/app/conversations/ConversationList';
+import ChatArea from '@/app/app/conversations/ChatArea';
+import ContextPanel from '@/app/app/conversations/ContextPanel';
+import { mockConversations } from '@/app/app/conversations/data';
+import type { Conversation, Message } from '@/app/app/conversations/types';
+
+const simulationTimeline: Array<{
+  lastMsg: string;
+  time: string;
+  messages: Message[];
+}> = [
+  {
+    lastMsg: 'Hi, I would like 2 pepperoni pizzas and 1 coke tonight.',
+    time: 'Now',
+    messages: [
+      {
+        id: 's0-customer',
+        type: 'customer',
+        text: 'Hi, I would like 2 pepperoni pizzas and 1 coke delivered tonight.',
+        time: '10:22 AM',
+      },
+    ],
+  },
+  {
+    lastMsg: 'AI asked to confirm delivery address and ETA.',
+    time: 'Now',
+    messages: [
+      {
+        id: 's0-customer',
+        type: 'customer',
+        text: 'Hi, I would like 2 pepperoni pizzas and 1 coke delivered tonight.',
+        time: '10:22 AM',
+      },
+      {
+        id: 's1-ai',
+        type: 'ai',
+        text: 'Sure, I can help with that. Should I use your usual address at 12B Admiralty Way, Lekki? Delivery will be about 35 to 45 minutes.',
+        time: '10:22 AM',
+      },
+    ],
+  },
+  {
+    lastMsg: 'Yes, same address. Please proceed.',
+    time: 'Now',
+    messages: [
+      {
+        id: 's0-customer',
+        type: 'customer',
+        text: 'Hi, I would like 2 pepperoni pizzas and 1 coke delivered tonight.',
+        time: '10:22 AM',
+      },
+      {
+        id: 's1-ai',
+        type: 'ai',
+        text: 'Sure, I can help with that. Should I use your usual address at 12B Admiralty Way, Lekki? Delivery will be about 35 to 45 minutes.',
+        time: '10:22 AM',
+      },
+      {
+        id: 's2-customer',
+        type: 'customer',
+        text: 'Yes, same address. Please proceed.',
+        time: '10:23 AM',
+      },
+    ],
+  },
+  {
+    lastMsg: 'AI drafted order: 2x Pepperoni Pizza, 1x Coke.',
+    time: 'Now',
+    messages: [
+      {
+        id: 's0-customer',
+        type: 'customer',
+        text: 'Hi, I would like 2 pepperoni pizzas and 1 coke delivered tonight.',
+        time: '10:22 AM',
+      },
+      {
+        id: 's1-ai',
+        type: 'ai',
+        text: 'Sure, I can help with that. Should I use your usual address at 12B Admiralty Way, Lekki? Delivery will be about 35 to 45 minutes.',
+        time: '10:22 AM',
+      },
+      {
+        id: 's2-customer',
+        type: 'customer',
+        text: 'Yes, same address. Please proceed.',
+        time: '10:23 AM',
+      },
+      {
+        id: 's3-system',
+        type: 'system',
+        text: 'AI generated order draft — 2x Pepperoni Pizza, 1x Coke (Total: ₦17,500)',
+        time: '10:23 AM',
+      },
+    ],
+  },
+  {
+    lastMsg: 'Order #ORD-2408 created successfully.',
+    time: 'Now',
+    messages: [
+      {
+        id: 's0-customer',
+        type: 'customer',
+        text: 'Hi, I would like 2 pepperoni pizzas and 1 coke delivered tonight.',
+        time: '10:22 AM',
+      },
+      {
+        id: 's1-ai',
+        type: 'ai',
+        text: 'Sure, I can help with that. Should I use your usual address at 12B Admiralty Way, Lekki? Delivery will be about 35 to 45 minutes.',
+        time: '10:22 AM',
+      },
+      {
+        id: 's2-customer',
+        type: 'customer',
+        text: 'Yes, same address. Please proceed.',
+        time: '10:23 AM',
+      },
+      {
+        id: 's3-system',
+        type: 'system',
+        text: 'AI generated order draft — 2x Pepperoni Pizza, 1x Coke (Total: ₦17,500)',
+        time: '10:23 AM',
+      },
+      {
+        id: 's4-system',
+        type: 'system',
+        text: 'Order #ORD-2408 created and payment initialized.',
+        time: '10:24 AM',
+      },
+    ],
+  },
+  {
+    lastMsg: 'AI sent secure payment link for Order #ORD-2408.',
+    time: 'Now',
+    messages: [
+      {
+        id: 's0-customer',
+        type: 'customer',
+        text: 'Hi, I would like 2 pepperoni pizzas and 1 coke delivered tonight.',
+        time: '10:22 AM',
+      },
+      {
+        id: 's1-ai',
+        type: 'ai',
+        text: 'Sure, I can help with that. Should I use your usual address at 12B Admiralty Way, Lekki? Delivery will be about 35 to 45 minutes.',
+        time: '10:22 AM',
+      },
+      {
+        id: 's2-customer',
+        type: 'customer',
+        text: 'Yes, same address. Please proceed.',
+        time: '10:23 AM',
+      },
+      {
+        id: 's3-system',
+        type: 'system',
+        text: 'AI generated order draft — 2x Pepperoni Pizza, 1x Coke (Total: ₦17,500)',
+        time: '10:23 AM',
+      },
+      {
+        id: 's4-system',
+        type: 'system',
+        text: 'Order #ORD-2408 created and payment initialized.',
+        time: '10:24 AM',
+      },
+      {
+        id: 's5-ai',
+        type: 'ai',
+        text: 'Great, your order is ready. Please use this secure link to complete payment: pay.handl.io/ord-2408',
+        time: '10:24 AM',
+      },
+    ],
+  },
+  {
+    lastMsg: 'Payment confirmed. Kitchen and dispatch notified.',
+    time: 'Now',
+    messages: [
+      {
+        id: 's0-customer',
+        type: 'customer',
+        text: 'Hi, I would like 2 pepperoni pizzas and 1 coke delivered tonight.',
+        time: '10:22 AM',
+      },
+      {
+        id: 's1-ai',
+        type: 'ai',
+        text: 'Sure, I can help with that. Should I use your usual address at 12B Admiralty Way, Lekki? Delivery will be about 35 to 45 minutes.',
+        time: '10:22 AM',
+      },
+      {
+        id: 's2-customer',
+        type: 'customer',
+        text: 'Yes, same address. Please proceed.',
+        time: '10:23 AM',
+      },
+      {
+        id: 's3-system',
+        type: 'system',
+        text: 'AI generated order draft — 2x Pepperoni Pizza, 1x Coke (Total: ₦17,500)',
+        time: '10:23 AM',
+      },
+      {
+        id: 's4-system',
+        type: 'system',
+        text: 'Order #ORD-2408 created and payment initialized.',
+        time: '10:24 AM',
+      },
+      {
+        id: 's5-ai',
+        type: 'ai',
+        text: 'Great, your order is ready. Please use this secure link to complete payment: pay.handl.io/ord-2408',
+        time: '10:24 AM',
+      },
+      {
+        id: 's6-customer',
+        type: 'customer',
+        text: 'Paid now. Thank you.',
+        time: '10:25 AM',
+      },
+      {
+        id: 's6-system',
+        type: 'system',
+        text: 'Payment confirmed for Order #ORD-2408. Kitchen and dispatch have been notified.',
+        time: '10:25 AM',
+      },
+    ],
+  },
+];
 
 export default function DashboardPreview() {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [step, setStep] = useState(0);
+  const moreRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const card = cardRef.current;
@@ -27,6 +257,63 @@ export default function DashboardPreview() {
     };
   }, []);
 
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setStep((prev) => (prev + 1) % simulationTimeline.length);
+    }, 3600);
+
+    return () => window.clearInterval(id);
+  }, []);
+
+  const activeScenario = simulationTimeline[step];
+
+  const activeConversation = useMemo<Conversation>(() => {
+    const includeCurrentOrder = step >= 4;
+    const currentOrderStatus = step >= 6 ? 'Paid' : step >= 5 ? 'Payment Pending' : 'Created';
+
+    return {
+      id: 'sim-1',
+      name: 'Mariam Bello',
+      initials: 'MB',
+      color: '#d4845a',
+      channel: 'WhatsApp',
+      lastMsg: activeScenario.lastMsg,
+      time: activeScenario.time,
+      unread: step < simulationTimeline.length - 1,
+      handledBy: 'ai',
+      messages: activeScenario.messages,
+      customer: {
+        email: 'mariam@email.com',
+        phone: '+234 803 000 0011',
+        orders: includeCurrentOrder ? 13 : 12,
+        ltv: '₦302,500',
+        location: 'Lagos, Nigeria',
+        recentOrders: [
+          ...(includeCurrentOrder
+            ? [
+                {
+                  id: 'ORD-2408',
+                  amount: '₦17,500',
+                  date: 'Today',
+                  status: currentOrderStatus,
+                },
+              ]
+            : []),
+          {
+            id: 'ORD-2399',
+            amount: '₦24,000',
+            date: '2 days ago',
+            status: 'Delivered',
+          },
+        ],
+      },
+    };
+  }, [activeScenario, step]);
+
+  const conversations = useMemo<Conversation[]>(() => {
+    return [activeConversation, ...mockConversations.slice(1, 4)];
+  }, [activeConversation]);
+
   return (
     <div className="hero-preview">
       <div className="preview-wrap">
@@ -35,173 +322,53 @@ export default function DashboardPreview() {
             <span className="pb-dot pb-r" />
             <span className="pb-dot pb-y" />
             <span className="pb-dot pb-g" />
-            <span className="pb-url">app.handl.io/dashboard</span>
+            <span className="pb-url">app.handl.io/app/conversations</span>
             <div style={{ width: 40, height: 24, background: 'var(--border)', borderRadius: 4 }} />
           </div>
-          <div className="preview-body">
-            {/* Sidebar */}
-            <div className="ps">
-              <div className="ps-logo">
-                <div className="ps-ld" />
-                HanDl
-              </div>
-              <div className="ps-sec">Overview</div>
-              <div className="ps-item active">
-                <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
-                  <rect x="1" y="1" width="5" height="5" rx="1" fill="currentColor" opacity=".8" />
-                  <rect x="8" y="1" width="5" height="5" rx="1" fill="currentColor" opacity=".4" />
-                  <rect x="1" y="8" width="5" height="5" rx="1" fill="currentColor" opacity=".4" />
-                  <rect x="8" y="8" width="5" height="5" rx="1" fill="currentColor" opacity=".4" />
-                </svg>
-                Dashboard
-              </div>
-              <div className="ps-item">
-                <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
-                  <path d="M2 3h10v7a2 2 0 01-2 2H4a2 2 0 01-2-2V3z" stroke="currentColor" strokeWidth="1.2" />
-                  <path d="M5 3V2h4v1" stroke="currentColor" strokeWidth="1.2" />
-                </svg>
-                Conversations
-              </div>
-              <div className="ps-item">
-                <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
-                  <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.2" />
-                  <path d="M4.5 7h5M7 4.5v5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-                </svg>
-                Products
-              </div>
-              <div className="ps-sec">Connect</div>
-              <div className="ps-item">
-                <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
-                  <path d="M2 3h10v7a2 2 0 01-2 2H4a2 2 0 01-2-2V3z" stroke="currentColor" strokeWidth="1.2" />
-                  <path d="M5 3V2h4v1" stroke="currentColor" strokeWidth="1.2" />
-                </svg>
-                Integrations
-              </div>
-              <div className="ps-item">
-                <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
-                  <rect x="1" y="4" width="12" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.2" />
-                  <path d="M4 4V3a3 3 0 016 0v1" stroke="currentColor" strokeWidth="1.2" />
-                </svg>
-                Orders
-              </div>
-              <div className="ps-sec">Insights</div>
-              <div className="ps-item">
-                <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
-                  <path d="M2 10l3-4 3 3 4-6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-                </svg>
-                Reports
-              </div>
-              <div className="ps-item">
-                <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
-                  <circle cx="7" cy="7" r="2.5" stroke="currentColor" strokeWidth="1.2" />
-                  <path d="M7 1v2M7 11v2M1 7h2M11 7h2" stroke="currentColor" strokeWidth="1.2" />
-                </svg>
-                Settings
-              </div>
-            </div>
+          <div className="preview-body preview-inbox-sim">
+            <div className="inbox-layout">
+              <ConversationList
+                conversations={conversations}
+                activeConvId={activeConversation.id}
+                activeFilter="All"
+                searchQuery=""
+                isMobile={false}
+                mobileView="list"
+                onSelectConv={() => {}}
+                onFilterChange={() => {}}
+                onSearchChange={() => {}}
+              />
 
-            {/* Main panel */}
-            <div className="pm">
-              <div className="pm-hdr">
-                <div className="pm-title">Dashboard</div>
-                <div className="pm-right">
-                  <div className="pm-date">Today, Feb 26</div>
-                  <div className="pm-av">J</div>
-                </div>
-              </div>
-              <div className="kpi-grid">
-                <div className="kpi-card">
-                  <div className="kpi-lbl">Conversations</div>
-                  <div className="kpi-val">148</div>
-                  <div className="kpi-delta">↑ 12% vs yesterday</div>
-                  <div className="sparkline">
-                    <svg width="100%" height="22" viewBox="0 0 80 22">
-                      <polyline points="0,18 10,14 20,16 30,8 40,12 50,6 60,8 70,3 80,5" fill="none" stroke="#2e8b6e" strokeWidth="1.5" strokeLinecap="round" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="kpi-card">
-                  <div className="kpi-lbl">Orders Today</div>
-                  <div className="kpi-val">37</div>
-                  <div className="kpi-delta">↑ 8% vs yesterday</div>
-                  <div className="sparkline">
-                    <svg width="100%" height="22" viewBox="0 0 80 22">
-                      <polyline points="0,16 10,13 20,18 30,10 40,7 50,10 60,5 70,7 80,3" fill="none" stroke="#2e8b6e" strokeWidth="1.5" strokeLinecap="round" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="kpi-card">
-                  <div className="kpi-lbl">Revenue</div>
-                  <div className="kpi-val">₦284k</div>
-                  <div className="kpi-delta">↑ 23% vs yesterday</div>
-                  <div className="sparkline">
-                    <svg width="100%" height="22" viewBox="0 0 80 22">
-                      <polyline points="0,20 10,16 20,14 30,12 40,14 50,9 60,5 70,7 80,2" fill="none" stroke="#2e8b6e" strokeWidth="1.5" strokeLinecap="round" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="kpi-card">
-                  <div className="kpi-lbl">AI Handled</div>
-                  <div className="kpi-val">84%</div>
-                  <div className="kpi-delta neg">↓ 2% vs yesterday</div>
-                  <div className="sparkline">
-                    <svg width="100%" height="22" viewBox="0 0 80 22">
-                      <polyline points="0,7 10,5 20,9 30,7 40,11 50,7 60,9 70,5 80,7" fill="none" stroke="#5a7fd4" strokeWidth="1.5" strokeLinecap="round" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <div className="bottom-grid">
-                <div className="b-card">
-                  <div className="b-card-title">Recent Conversations</div>
-                  <div className="ci">
-                    <div className="ci-av">A</div>
-                    <div className="ci-info">
-                      <div className="ci-name">Adaeze Obi</div>
-                      <div className="ci-msg">I want to order the jollof rice</div>
-                    </div>
-                    <span className="tag tag-ai">AI</span>
-                  </div>
-                  <div className="ci">
-                    <div className="ci-av b">B</div>
-                    <div className="ci-info">
-                      <div className="ci-name">Bolu Adeyemi</div>
-                      <div className="ci-msg">When will my order arrive?</div>
-                    </div>
-                    <span className="tag tag-wait">Wait</span>
-                  </div>
-                  <div className="ci">
-                    <div className="ci-av c">C</div>
-                    <div className="ci-info">
-                      <div className="ci-name">Chidi Eze</div>
-                      <div className="ci-msg">Order #1847 has been paid ✓</div>
-                    </div>
-                    <span className="tag tag-human">Human</span>
-                  </div>
-                </div>
-                <div className="b-card">
-                  <div className="b-card-title">AI Agent Activity</div>
-                  <div className="bar-row">
-                    <div className="bar-lbl">Orders</div>
-                    <div className="bar-bg"><div className="bar-fill bar-teal" style={{ width: '85%' }} /></div>
-                    <div style={{ fontSize: 9, color: 'var(--ink-f)', width: 28, textAlign: 'right' }}>37</div>
-                  </div>
-                  <div className="bar-row">
-                    <div className="bar-lbl">AI Resolved</div>
-                    <div className="bar-bg"><div className="bar-fill bar-blue" style={{ width: '84%' }} /></div>
-                    <div style={{ fontSize: 9, color: 'var(--ink-f)', width: 28, textAlign: 'right' }}>84%</div>
-                  </div>
-                  <div className="bar-row">
-                    <div className="bar-lbl">Escalated</div>
-                    <div className="bar-bg"><div className="bar-fill bar-orange" style={{ width: '16%' }} /></div>
-                    <div style={{ fontSize: 9, color: 'var(--ink-f)', width: 28, textAlign: 'right' }}>16%</div>
-                  </div>
-                  <div style={{ display: 'flex', gap: 4, marginTop: 10 }}>
-                    <span className="tag tag-live">● Agent Active</span>
-                    <span className="tag tag-ai">3 Channels</span>
-                  </div>
-                </div>
-              </div>
+              <ChatArea
+                activeConv={activeConversation}
+                isMobile={false}
+                isTablet={false}
+                mobileView="chat"
+                showContextPanel
+                moreOpen={false}
+                showAiNotice={false}
+                message=""
+                moreRef={moreRef}
+                onBack={() => {}}
+                onToggleContext={() => {}}
+                onToggleMore={() => {}}
+                onCloseMore={() => {}}
+                onLetAiHandle={() => {}}
+                onTakeOverFromAi={() => {}}
+                onSend={() => {}}
+                onConfirmSend={() => {}}
+                onCancelNotice={() => {}}
+                onMessageChange={() => {}}
+              />
+
+              <ContextPanel
+                activeConv={activeConversation}
+                isMobile={false}
+                isTablet={false}
+                mobileView="context"
+                showContextPanel
+                onBack={() => {}}
+              />
             </div>
           </div>
         </div>

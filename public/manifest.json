@@ -2,7 +2,7 @@
   "name": "HanDl — Humanized AI for Business Automation",
   "short_name": "HanDl",
   "description": "HanDl is an AI-powered business automation platform that connects messaging channels, manages conversations, triggers payments and logistics, and runs intelligent workflows for modern businesses.",
-  "start_url": "/dashboard",
+  "start_url": "/conversations",
   "scope": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone"],

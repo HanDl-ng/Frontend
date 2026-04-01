@@ -31,11 +31,11 @@ export default function Hero() {
           &nbsp;
         </div>
         <h1 className="hero-headline">
-          An <span className="uw">AI agent</span>
+          The automation layer
           <br />
           for your
           <br />
-          <span className="accent">business ops.</span>
+          <span className="accent">sales ops.</span>
         </h1>
         <p className="hero-sub">
           One AI agent that handles customer conversations, takes orders, manages products, and
@@ -43,7 +43,7 @@ export default function Hero() {
         </p>
         <div className="hero-actions">
           <a href="/signup" className="btn btn-primary btn-xl">Get started free</a>
-          <a href="#" className="btn btn-ghost btn-xl">▶&nbsp;&nbsp;Watch 3-min demo</a>
+          <a href="/how-it-works" className="btn btn-ghost btn-xl">See how it works</a>
         </div>
       </div>
 

@@ -8,6 +8,14 @@
   background: var(--ink);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .28s cubic-bezier(.4,0,.2,1), visibility .35s;
+}
+
+.updates-banner.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 @keyframes slideDown {
@@ -109,6 +117,10 @@
 /* Adjust nav position when banner is visible */
 .landing-page nav {
   top: 44px;
+}
+
+body.updates-hidden .landing-page nav {
+  top: 0;
 }
 
 /* Mobile responsiveness */
